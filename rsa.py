@@ -15,10 +15,18 @@ def get_random_prime(size):
         if is_prime(number):
             return number
 
-def multiplicative_inverse(x, n):
-    for i in range(2, n):
-        if i * x % n == 1:
-            return i
+def multiplicative_inverse(x, n): # using the extended Euclidean algorithm, source: https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm#Computing_multiplicative_inverses_in_modular_structures
+    t, new_t = 0, 1
+    r, new_r = n, x
+    while new_r != 0:
+        quotient = r // new_r
+        t, new_t = new_t, t - quotient * new_t
+        r, new_r = new_r, r - quotient * new_r
+    if r > 1:
+        return None
+    if t < 0:
+        t = t + n
+    return t
 
 def generate_keys(key_size):
     if key_size < 3:
