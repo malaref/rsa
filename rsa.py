@@ -4,7 +4,7 @@ from math import gcd
 def is_prime(number):
     if number < 2:
         return False
-    for i in range(2, round(number ** 0.5)):
+    for i in range(2, round(number ** 0.5 + 0.5) + 1):
         if number % i == 0:
             return False
     return True
@@ -29,8 +29,8 @@ def multiplicative_inverse(x, n): # using the extended Euclidean algorithm, sour
     return t
 
 def generate_keys(key_size):
-    if key_size < 3:
-        raise ValueError('Key size must not be < 3')
+    if key_size < 4:
+        raise ValueError('Key size must not be < 4')
     try:
         p = q = get_random_prime(key_size)
         while q == p:
@@ -45,7 +45,7 @@ def generate_keys(key_size):
                     return generate_keys(key_size) # must choose new p and q; prettier than a huge loop
                 return e, d, n
     except ValueError: # empty range for randrange()
-        return generate_keys(key_size) # since key_size is not < 3, this is guaranteed to terminate; just try again!
+        return generate_keys(key_size) # since key_size is not < 4, this is guaranteed to terminate; just try again!
 
 def crypt(message, key):
     return message ** key[0] % key[1]
