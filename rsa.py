@@ -9,9 +9,9 @@ def is_prime(number):
             return False
     return True
 
-def get_random_prime(size):
+def get_random_prime(length):
     while True:
-        number = getrandbits(size)
+        number = getrandbits(length)
         if is_prime(number):
             return number
 
@@ -28,13 +28,13 @@ def multiplicative_inverse(x, n): # using the extended Euclidean algorithm, sour
         t = t + n
     return t
 
-def generate_keys(key_size):
-    if key_size < 4:
-        raise ValueError('Key size must not be < 4')
+def generate_keys(key_length):
+    if key_length < 4:
+        raise ValueError('Key length must not be < 4')
     try:
-        p = q = get_random_prime(key_size)
+        p = q = get_random_prime(key_length)
         while q == p:
-            q = get_random_prime(key_size)
+            q = get_random_prime(key_length)
         n = p * q
         phi_n = (p-1) * (q-1)
         while True:
@@ -42,10 +42,10 @@ def generate_keys(key_size):
             if gcd(e, phi_n) == 1:
                 d = multiplicative_inverse(e, phi_n)
                 if d == e:
-                    return generate_keys(key_size) # must choose new p and q; prettier than a huge loop
+                    return generate_keys(key_length) # must choose new p and q; prettier than a huge loop
                 return e, d, n
     except ValueError: # empty range for randrange()
-        return generate_keys(key_size) # since key_size is not < 4, this is guaranteed to terminate; just try again!
+        return generate_keys(key_length) # since key_length is not < 4, this is guaranteed to terminate; just try again!
 
 def crypt(message, key):
     return message ** key[0] % key[1]
