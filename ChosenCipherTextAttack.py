@@ -1,13 +1,14 @@
 from rsa import generate_keys, crypt
 from Utils import multiplicative_inverse
 
+
 def get_original_text(cipher_text, e, d, n):
     padding_plain_text = 2
     dummy_cipher_text = padding_plain_text
     dummy_cipher_text = crypt(message=dummy_cipher_text, key=(e, n))
     dummy_cipher_text = dummy_cipher_text * cipher_text
     signed_message = crypt(message=dummy_cipher_text, key=(d, n))
-    return multiplicative_inverse(signed_message,n)//2
+    return signed_message * multiplicative_inverse(padding_plain_text, n)
 
 
 if __name__ == "__main__":
