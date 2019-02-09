@@ -1,10 +1,9 @@
-from rsa import generate_keys, crypt
+from rsa import generate_keys
 from time import time
-from random import randrange
 from matplotlib import pyplot
 from MathematicalAttack import get_private_key
 
-max_key_length = 30
+max_key_length = 10
 
 key_lengths = list(range(4, max_key_length + 1))
 encryption_times = []
