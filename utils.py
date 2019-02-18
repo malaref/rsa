@@ -6,9 +6,7 @@ def is_prime(number):
             return False
     return True
 
-
-def multiplicative_inverse(x,
-                           n):  # using the extended Euclidean algorithm, source: https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm#Computing_multiplicative_inverses_in_modular_structures
+def multiplicative_inverse(x, n):  # using the extended Euclidean algorithm, source: https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm#Computing_multiplicative_inverses_in_modular_structures
     t, new_t = 0, 1
     r, new_r = n, x
     while new_r != 0:

@@ -1,7 +1,7 @@
 from random import randrange
 
 from rsa import crypt
-from Utils import multiplicative_inverse
+from utils import multiplicative_inverse
 
 
 def get_original_text(cipher_text, e, d, n):
@@ -13,7 +13,7 @@ def get_original_text(cipher_text, e, d, n):
 if __name__ == "__main__":
     from rsa import generate_keys
 
-    e, d, n = generate_keys(key_length=10)
+    e, d, n = generate_keys(10)
     print('n = ' + str(n) + ' d = ' + str(d) + ' e = ' + str(e))
     original_message = randrange(1, n)
     cipher_message = crypt(message=original_message, key=(e, n))
