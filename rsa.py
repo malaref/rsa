@@ -30,4 +30,4 @@ def generate_keys(key_length):
         return generate_keys(key_length)  # since key_length is not < 8, this is guaranteed to terminate; just try again!
 
 def crypt(message, key):
-    return message ** key[0] % key[1]
+    return pow(message, key[0], key[1])
