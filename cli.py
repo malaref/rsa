@@ -1,5 +1,5 @@
 from rsa import generate_keys, crypt
-from mathematical_attack import get_private_key
+from crack import math_attack
 from plot import plot_crypt, plot_crack
 
 import argparse
@@ -26,7 +26,7 @@ if args.command == 'generate_keys':
 elif args.command == 'encrypt' or args.command == 'decrypt':
     print(crypt(args.message, args.key))
 elif args.command == 'crack':
-    print(get_private_key(*args.key))
+    print(math_attack(*args.key))
 elif args.command == 'plot':
     if args.operation == 'crypt':
         plot_crypt(args.max_seed_length, args.number_of_points)

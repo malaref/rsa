@@ -23,7 +23,7 @@ def pollard_rho_factoring(n):
         if d != n:
             return d
 
-def get_private_key(e, n):
+def math_attack(e, n):
     p = pollard_rho_factoring(n)
     q = n // p
     phi_n = (p - 1) * (q - 1)

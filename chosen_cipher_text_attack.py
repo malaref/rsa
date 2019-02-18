@@ -1,24 +1,11 @@
-from random import randrange
-
 from rsa import crypt
 from utils import multiplicative_inverse
 
 
-def get_original_text(cipher_text, e, d, n):
-    padding_plain_text = 2
-    signed_message = crypt(crypt(message=padding_plain_text, key=(e, n)) * cipher_text,(d,n))
-    return signed_message * multiplicative_inverse(padding_plain_text, n) % n
+padding_plain_text = 2
 
-
-if __name__ == "__main__":
-    from rsa import generate_keys
-
-    e, d, n = generate_keys(10)
-    print('n = ' + str(n) + ' d = ' + str(d) + ' e = ' + str(e))
-    original_message = randrange(1, n)
-    cipher_message = crypt(message=original_message, key=(e, n))
-    cracked_message = get_original_text(cipher_message, e, d, n)
-    if cracked_message == original_message:
-        print('HORRAY')
-    else:
-        print('SHIT')
+cipher_text = int(input('Cipher text: '))
+e, n = tuple(int(i) for i in input('Public key: ').split())
+print('Sign this:', crypt(padding_plain_text, (e, n)) * cipher_text % n)
+signed_message = int(input('Signed message: '))
+print('Original message:', signed_message * multiplicative_inverse(padding_plain_text, n) % n)

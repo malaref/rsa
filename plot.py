@@ -3,7 +3,7 @@ from matplotlib import pyplot
 from random import randrange
 
 from rsa import generate_keys, crypt
-from mathematical_attack import get_private_key
+from crack import math_attack
 
 
 def plot_crypt(max_seed_length, number_of_points):
@@ -31,7 +31,7 @@ def plot_crack(max_seed_length, number_of_points):
         print('Computing point', i + 1)
         e, d, n = generate_keys(randrange(4, max_seed_length))
         time_before = time()
-        private_key = get_private_key(e, n)
+        private_key = math_attack(e, n)
         time_after = time()
         if d != private_key:
             raise RuntimeError
